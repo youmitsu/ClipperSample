@@ -10,4 +10,6 @@
 
     <style name="ToolbarTheme" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar"/>
 
+    <style name="BottomAppBarTheme" parent="Widget.MaterialComponents.BottomAppBar"/>
+
 </resources>
