@@ -1,58 +1,51 @@
 package jp.co.youmitsu.ClippableLayoutTestApp
 
 import android.os.Bundle
+import android.os.Handler
+import android.view.Gravity
 import android.view.Menu
+import android.view.View
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import jp.co.youmeee.clipper.CircleClipEntry
+import jp.co.youmeee.clipper.*
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
+
+    private val descriptionView: View by lazy {
+        layoutInflater.inflate(R.layout.tutorial_view_first, null)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
+        showClipper()
+    }
 
-//        // The target view for clipping.
-        val entry = CircleClipEntry(fab, resources.getDimensionPixelSize(R.dimen.fab_margin))
-        val entry2 = CircleClipEntry(fab)
-//        // The view for description.
-//        val descLayout = layoutInflater.inflate(R.layout.tutorial_view_first, null)
-//        val cl2 = ClipperLayout(this).also {
-//            // Initialize and set config
-//            it.add(entry)
-//            it.descView = DescriptionView(descLayout, R.id.next_button)
-//        }
-//        cl2.clip(container, window)  // execute clip
-
-
-//        val cl1 = ClipperLayout(this).also { it.add(entry) }
-//        // Bundle multiple ClipperLayout and execute in order
-//        Clipper.createBundleExecutor(
-//            container, window, null, cl1
-//        ).execute()
-
-//        val descView = layoutInflater.inflate(R.layout.tutorial_view_first, null)
-//        ClipperLayout(this).also { cl ->
-//            cl.add(CircleClipEntry(fab, resources.getDimensionPixelSize(R.dimen.fab_margin)))
-//            cl.descView = DescriptionView(descView, R.id.next_button)
-//        }.clip(container, window, CircleRevealClipAnimator())
-
-
-//        val cl2 = ClipperLayout(this).also { cl2 ->
-//            cl2.add(RectClipEntry(fab, resources.getDimensionPixelSize(R.dimen.fab_margin)))
-//            cl2.descView = DescriptionView(descView, R.id.next_button)
-//        }
-//        Clipper.createBundleExecutor(
-//            container,
-//            window,
-//            CircleRevealClipAnimator(),
-//            cl2
-//        ).execute()
+    private fun getDescriptionView(text: String): DescriptionView {
+        descriptionView.findViewById<TextView>(R.id.text).text = text
+        return DescriptionView(
+            descriptionView,
+            R.id.next_button,
+            gravity = Gravity.BOTTOM or Gravity.CENTER_HORIZONTAL,
+            leftMargin = resources.getDimensionPixelSize(R.dimen.tutorial_side_margin),
+            rightMargin = resources.getDimensionPixelSize(R.dimen.tutorial_side_margin),
+            bottomMargin = resources.getDimensionPixelSize(R.dimen.tutorial_botom_margin)
+        )
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.toolbar_menu, menu)
         return true
+    }
+
+    private fun showClipper() {
+        val cl1 = ClipperLayout(this, getDescriptionView(resources.getString(R.string.description_text1)))
+            .addEntry(CircleClipEntry(fab, resources.getDimensionPixelSize(R.dimen.fab_margin)))
+        val executor: ClipBundleExecutor = Clipper.createBundleExecutor(container, window, null, cl1)
+        Handler().postDelayed({
+            executor.execute()
+        }, 500)
     }
 }

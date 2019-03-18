@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">ClippableLayoutTestApp2</string>
+
+    <string name="description_text1">You can record voice with this button.</string>
+    <string name="description_text2">You can share and edit with these button.</string>
+
 </resources>
