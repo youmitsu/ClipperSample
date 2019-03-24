@@ -1,27 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView
+<jp.co.youmeee.clipper.ClipperLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_height="match_parent"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:minHeight="200dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginStart="10dp">
+        app:dismissTriggerItemId="@id/next_button">
 
-    <TextView
-            android:id="@+id/text"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:layout_gravity="center_horizontal"
-            android:text="You can record voice with this button."
-            android:layout_margin="20dp"
-            android:textSize="20sp"/>
-
-    <com.google.android.material.button.MaterialButton
-            android:id="@+id/next_button"
-            android:layout_height="wrap_content"
+    <com.google.android.material.card.MaterialCardView
             android:layout_width="wrap_content"
-            android:layout_gravity="right|bottom"
-            android:layout_margin="20dp"
-            android:text="I GOT IT!"/>
+            android:layout_height="wrap_content"
+            android:minHeight="200dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_gravity="center_vertical|center_horizontal">
 
-</com.google.android.material.card.MaterialCardView>
+        <TextView
+                android:id="@+id/text"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_gravity="center_horizontal"
+                android:text="You can record voice with this button."
+                android:layout_margin="20dp"
+                android:textSize="20sp"/>
+
+        <com.google.android.material.button.MaterialButton
+                android:id="@+id/next_button"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_gravity="right|bottom"
+                android:layout_margin="20dp"
+                android:text="I GOT IT!"/>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</jp.co.youmeee.clipper.ClipperLayout>
